@@ -4,6 +4,8 @@ import edu.ynu.entity.CommonResult;
 import edu.ynu.entity.User;
 import edu.ynu.fegin.UserFeignService;
 import edu.ynu.loadbalance.CustomLoadBalanceConfiguration;
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/cart")
@@ -49,24 +52,38 @@ public class CartController {
         return userFeignService.hello();
     }
 
-    @GetMapping("addCart/{userId}")
+    @GetMapping("/addCart/{userId}")
+    @CircuitBreaker(name = "backendA", fallbackMethod = "fallback")
+//    @Bulkhead(name = "bulkheadA", fallbackMethod = "fallback", type = Bulkhead.Type.SEMAPHORE) // SEMAPHORE 表示用信号量方式来隔离
     public CommonResult<User> addCart(@PathVariable Integer userId) {
-//    这种字符串拼接可能导致注入攻击
-//        return restTemplate.getForObject(
-//                "http://localhost:8099/user/getUserById/" + userId,
-//                CommonResult.class
-//        );
-        List<ServiceInstance> instanceList = discoveryClient.getInstances("PROVIDER-SERVER");
+        System.out.println("进入方法");
+//        try {
+//            Thread.sleep(1000); // 测试慢调用
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        CommonResult<User> list = userFeignService.getUserById(userId);
+        System.out.println("出方法");
+        return list;
+    }
 
-        ServiceInstance serviceInstance = instanceList.get(0);
 
-//        CommonResult<User> result = restTemplate.getForObject(
-//                "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/user/getUserById/" + userId.toString(),
-//                CommonResult.class
-//        );
-//
-//        return result;
-        return userFeignService.getUserById(userId);
+    @GetMapping("/addCart1/{userId}")
+    @Bulkhead(name = "bulkheadB", fallbackMethod = "fallback", type = Bulkhead.Type.THREADPOOL) // THREADPOOL 表示用线程池方式来隔离
+    public CompletableFuture<User> addCart1(@PathVariable Integer userId) {
+        System.out.println("进入方法");
+        CompletableFuture<User> result = CompletableFuture.supplyAsync(() -> {
+            return userFeignService.getUserById(userId).getResult();
+        });
+        System.out.println("出方法");
+        return result;
+    }
+
+    public CommonResult<User> fallback(Integer userId, Throwable e) {
+        e.printStackTrace();
+        System.out.println("fallback调用");
+        CommonResult<User> result = new CommonResult<>(400, "当前用户服务不正常,服务降级稍后再试", new User());
+        return result;
     }
 
     @PostMapping("addCart2/{userId}")

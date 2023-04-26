@@ -1,5 +1,7 @@
 # 创建项目
 
+- [ ] completableFuture
+
 ##   
 
 packagin
@@ -31,3 +33,20 @@ public String hello(){
 openfeign
 
 负载均衡自行配置，查看environment# spring-cloud-learn
+
+circuitbreaker 只保留了熔断器
+
+熔断和隔离的区别:
+熔断：
+1. 服务失效熔断
+2. 慢调用熔断
+
+熔断一定要有，如果没有熔断，做微服务如果没有熔断就可能会出现雪崩效应，所有的服务都会失效
+
+而限流和隔离是为了保证服务的可用性
+
+限流以时间为维度，线程隔离或者信号量隔离是从底层上限制并发量
+
+熔断限流可以同时存在
+
+completableFuture
