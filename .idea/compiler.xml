@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Service_Provider_11001" />
+        <module name="Gateway_Server_14000" />
         <module name="Service_Provider_11000" />
         <module name="Service_Consumer_12000" />
         <module name="Eureka_server_13001" />

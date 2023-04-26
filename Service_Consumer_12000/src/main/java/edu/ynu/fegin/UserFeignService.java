@@ -3,6 +3,7 @@ package edu.ynu.fegin;
 import edu.ynu.entity.CommonResult;
 import edu.ynu.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 

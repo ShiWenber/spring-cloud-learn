@@ -14,6 +14,7 @@
         <module>Eureka_server_13000</module>
         <module>Service_Provider_11001</module>
         <module>Eureka_server_13001</module>
+        <module>Gateway_Server_14000</module>
     </modules>
     <!--父项目打包方式-->
     <packaging>pom</packaging>
@@ -37,6 +38,14 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>2022.0.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+<!--            配置alibaba dependencies-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2022.0.0.0-RC1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
