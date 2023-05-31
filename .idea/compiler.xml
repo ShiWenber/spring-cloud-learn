@@ -6,13 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Service_Provider_11001" />
         <module name="Gateway_Server_14000" />
-        <module name="Service_Provider_11000" />
         <module name="Service_Consumer_12000" />
+        <module name="common" />
+        <module name="Service_Provider_11001" />
+        <module name="Config_Server_15001" />
+        <module name="Service_Provider_11000" />
         <module name="Eureka_server_13001" />
         <module name="Eureka_server_13000" />
+        <module name="Config_Server_15000" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="common" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      name: Service_Consumer_12000
+      profile: dev
+      label: main
+      uri: http://localhost:15000

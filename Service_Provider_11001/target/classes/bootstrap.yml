@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    config:
+      name: Service_Provider_11001
+      profile: dev
+      label: main
+      discovery:
+        enabled: true
+        service-id: config-server
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:13000/eureka/, http://localhost:13001/eureka/
+  instance:
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true

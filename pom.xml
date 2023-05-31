@@ -15,6 +15,8 @@
         <module>Service_Provider_11001</module>
         <module>Eureka_server_13001</module>
         <module>Gateway_Server_14000</module>
+        <module>Config_Server_15000</module>
+        <module>Config_Server_15001</module>
     </modules>
     <!--父项目打包方式-->
     <packaging>pom</packaging>
