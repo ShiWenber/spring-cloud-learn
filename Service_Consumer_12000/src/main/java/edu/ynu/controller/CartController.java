@@ -21,8 +21,8 @@ import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/cart")
-//@LoadBalancerClient(name = "provider-server", configuration = CustomLoadBalanceConfiguration.class) // 随机
-@LoadBalancerClient(name = "provider-server", configuration = RoundRobinLoadBalancer.class) // 采用默认的负载均衡策略
+@LoadBalancerClient(name = "provider-server", configuration = CustomLoadBalanceConfiguration.class) // 随机
+//@LoadBalancerClient(name = "provider-server", configuration = RoundRobinLoadBalancer.class) // 采用默认的负载均衡策略
 public class CartController {
     @Autowired
     private RestTemplate restTemplate;
@@ -55,7 +55,7 @@ public class CartController {
     }
 
     @GetMapping("/addCart/{userId}")
-//    @CircuitBreaker(name = "backendA", fallbackMethod = "fallback")
+    @CircuitBreaker(name = "backendA", fallbackMethod = "fallback")
 //    @Bulkhead(name = "bulkheadA", fallbackMethod = "fallback", type = Bulkhead.Type.SEMAPHORE) // SEMAPHORE 表示用信号量方式来隔离
     public CommonResult<User> addCart(@PathVariable Integer userId) {
         System.out.println("进入方法");
