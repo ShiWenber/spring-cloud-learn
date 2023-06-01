@@ -6,6 +6,7 @@ import edu.ynu.fegin.UserFeignService;
 import edu.ynu.loadbalance.CustomLoadBalanceConfiguration;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -54,13 +55,23 @@ public class CartController {
         return userFeignService.hello();
     }
 
+
+    public CommonResult<User> fallback(Integer userId, Throwable e) {
+        e.printStackTrace();
+        System.out.println("fallback调用");
+        CommonResult<User> result = new CommonResult<>(400, "当前用户服务不正常,服务降级稍后再试", new User());
+        return result;
+    }
+
     @GetMapping("/addCart/{userId}")
-    @CircuitBreaker(name = "backendA", fallbackMethod = "fallback")
+//    @CircuitBreaker(name = "backendA", fallbackMethod = "fallback")
 //    @Bulkhead(name = "bulkheadA", fallbackMethod = "fallback", type = Bulkhead.Type.SEMAPHORE) // SEMAPHORE 表示用信号量方式来隔离
+    @Bulkhead(name = "bulkheadB", fallbackMethod = "fallback", type = Bulkhead.Type.THREADPOOL) // THREADPOOL 表示用线程池方式来隔离
+    @RateLimiter(name= "ratelimiterA", fallbackMethod = "fallback")
     public CommonResult<User> addCart(@PathVariable Integer userId) {
         System.out.println("进入方法");
         try {
-            Thread.sleep(1000); // 测试慢调用
+            Thread.sleep(3000); // 测试慢调用
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -81,12 +92,6 @@ public class CartController {
         return result;
     }
 
-    public CommonResult<User> fallback(Integer userId, Throwable e) {
-        e.printStackTrace();
-        System.out.println("fallback调用");
-        CommonResult<User> result = new CommonResult<>(400, "当前用户服务不正常,服务降级稍后再试", new User());
-        return result;
-    }
 
     @PostMapping("/addUser")
     public CommonResult<User> addUser(@RequestBody User user) {
