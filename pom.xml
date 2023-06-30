@@ -9,10 +9,12 @@
     <version>1.0-SNAPSHOT</version>
     <!--父工程-->
     <modules>
-        <module>Service_Provider_11000</module>
+        <module>User_server_11000</module>
+        <module>User_server_11002</module>
+        <module>Shop_server_18000</module>
         <module>Service_Consumer_12000</module>
         <module>Eureka_server_13000</module>
-        <module>Service_Provider_11001</module>
+        <module>User_server_11001</module>
         <module>Eureka_server_13001</module>
         <module>Gateway_Server_14000</module>
         <module>Config_Server_15000</module>
@@ -20,6 +22,7 @@
     </modules>
     <!--父项目打包方式-->
     <packaging>pom</packaging>
+
 
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
@@ -43,7 +46,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-<!--            配置alibaba dependencies-->
+            <!--            配置alibaba dependencies-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>

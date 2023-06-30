@@ -97,3 +97,7 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 **/application.yml
+logs/
+.idea/
+target/
+resources/

@@ -2,23 +2,36 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Gateway_Server_14000" />
+        <module name="User_server_11003" />
+        <module name="User_server_11002" />
         <module name="Service_Consumer_12000" />
-        <module name="common" />
-        <module name="Service_Provider_11001" />
+        <module name="User_server_11001" />
+        <module name="User_server_11000" />
+        <module name="Order_server_16000" />
         <module name="Config_Server_15001" />
-        <module name="Service_Provider_11000" />
         <module name="Eureka_server_13001" />
         <module name="Eureka_server_13000" />
         <module name="Config_Server_15000" />
+        <module name="common" />
+        <module name="ecs" />
+        <module name="Shop_server_18000" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="common" target="19" />
+      <module name="User_server_11000 (1)" target="19" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="User_server_11000" options="" />
+      <module name="ecs" options="-parameters" />
+    </option>
   </component>
 </project>

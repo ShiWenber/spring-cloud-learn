@@ -7,6 +7,15 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/Service_Provider_11000/pom.xml" />
         <option value="$PROJECT_DIR$/Service_Provider_11001/pom.xml" />
+        <option value="$PROJECT_DIR$/infrastructure/Config_Server_15001/pom.xml" />
+        <option value="$PROJECT_DIR$/infrastructure/Config_Server_15000/pom.xml" />
+        <option value="$PROJECT_DIR$/infrastructure/Eureka_server_13001/pom.xml" />
+        <option value="$PROJECT_DIR$/infrastructure/Gateway_Server_14000/pom.xml" />
+        <option value="$PROJECT_DIR$/elmServer/pom.xml" />
+        <option value="$PROJECT_DIR$/Shop_server_18000/pom.xml" />
+        <option value="$PROJECT_DIR$/User_server_11002/pom.xml" />
+        <option value="$PROJECT_DIR$/Order_server_16000/pom.xml" />
+        <option value="$PROJECT_DIR$/User_server_11003/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -15,7 +24,7 @@
       </set>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="openjdk-19" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="19" project-jdk-type="JavaSDK" />
   <component name="ProjectType">
     <option name="id" value="jpab" />
   </component>
